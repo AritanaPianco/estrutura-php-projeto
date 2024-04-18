@@ -6,14 +6,22 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
+    '667aeda72477189d0494fecd327c3641' => $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
     'd6347f49d0ed6b34916501b61921f090' => $baseDir . '/app/helpers/constantes.php',
     '0a08994eab3db5ce1c32228553c2ff86' => $baseDir . '/app/router/router.php',
     'aac4e8ad658e35335fdbde445c9af141' => $baseDir . '/app/core/controller.php',
     'e0cb52ed9a7e1fcf25ce23ed6adf42b9' => $baseDir . '/app/database/connect.php',
     'ede913e780455757b47765f8abc31742' => $baseDir . '/app/database/fetch.php',
+    '876b4f22afd77051fbaa53346930541d' => $baseDir . '/app/database/update.php',
+    '5a2cdc651e67fde3bf454f0691d087ab' => $baseDir . '/app/database/delete.php',
     '7fb61c9f696e1b6a7b86b7af21915305' => $baseDir . '/app/database/create.php',
     'bfe32b383cba05b8827cb0c507277675' => $baseDir . '/app/helpers/redirect.php',
     'd46f1b7e3c000b43adb472675d92cfea' => $baseDir . '/app/helpers/flash.php',
     '94ef2eea8d34bc053c39afffe2688270' => $baseDir . '/app/helpers/session.php',
     '6a36059229e5b0ea87a5793c5a8f4d95' => $baseDir . '/app/helpers/validate.php',
+    '867c8dc2ed5591d2601445bc90d7d7ca' => $baseDir . '/app/helpers/validations.php',
+    '32ea7c45141d8683b996d79d4506fe3d' => $baseDir . '/app/helpers/helpers.php',
+    '879df3bf8033cab604e7206bebfa73f1' => $baseDir . '/app/helpers/old.php',
+    'd5470fb3a0a5e407d96a2eb8794d5037' => $baseDir . '/app/helpers/csrf.php',
 );

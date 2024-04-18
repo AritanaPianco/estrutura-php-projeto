@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?></title>
+    <title><?php echo $this->e($title)?></title>
     <link rel="stylesheet" type='text/css' href="/assets/css/styles.css">
 </head>
 <body>
-      <!-- <h2>PHP profissional</h2> -->
+   
+       <div id="header">
+         <?=$this->insert('partials/header')?>
+       </div>
 
-      <div id="header">
-          <?php require 'partials/header.php'; ?> 
-      </div>
+       <div class="container">
+           <?=$this->section('content')?>  
+       </div>
 
-      <div class="container">
-          <?php  require VIEWS.$view; ?>
-      </div>
+       <script src='app.js'></script>
+       <?=$this->section('scripts')?>  
 
 </body>
 </html>

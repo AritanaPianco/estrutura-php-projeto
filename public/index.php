@@ -2,9 +2,13 @@
 
 require "bootstrap.php";
 
-
 try {
+
    $data = router();
+
+    if(isAjax()){
+       die();
+    }
 
 
    if(!isset($data['data'])){
@@ -21,16 +25,22 @@ try {
    }
   
 
-   if(!file_exists(VIEWS.$data['view'])){ // aqui ja esta verificando se existe essa view no indice
+   if(!file_exists(VIEWS.$data['view'].'.php')){ // aqui ja esta verificando se existe essa view no indice
     throw new Exception("Essa view {$data['view']} não existe");
     
    }
 
-   extract($data['data']);
-   $view =  $data['view'];
-   require  VIEWS.'master.php';
+    // Create new Plates instance
+    $templates = new League\Plates\Engine(VIEWS);
+
+    // Render a template
+    echo $templates->render($data['view'], $data['data']);
+
+
+ //    extract($data['data']);
+ //    $view =  $data['view'];
+ //    require  VIEWS.'master.php';
     
-   
 } catch (Exception $e) {
     var_dump($e->getMessage());
 

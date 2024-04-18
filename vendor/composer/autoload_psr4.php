@@ -7,5 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'app\\' => array($baseDir . '/app'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
+    'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
     'Aritana\\EstruturaPhp\\' => array($baseDir . '/src'),
 );

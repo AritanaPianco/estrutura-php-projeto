@@ -1,0 +1,34 @@
+{
+  "name": "EstruturaPHP",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --progress --watch",
+    "prod": "cross-env NODE_ENV=production webpack --progress --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AritanaPianco/estrutura-php-projeto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AritanaPianco/estrutura-php-projeto/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.7.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "alpinejs": "^2.7.0",
+    "axios": "^1.6.8",
+    "cross-env": "^7.0.3"
+  }
+}

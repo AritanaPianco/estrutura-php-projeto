@@ -4,16 +4,29 @@ namespace app\controllers;
 
 class Home
 {
-
-
+ 
    public function index($params){
-     
-      $users = all('users');
+    
 
-      return [
-        'view' => 'home.php',
-        'data' => ['users' => $users, 'title' => 'Home']
-      ];
+      
+      // dd(delete('users', ['id' => 7])); 
+      // $updated = update('users',['nome' => 'marcelo', 'sobrenome' => 'lima', 'email' => 'marcelo@gmail.com'],['id' => 7]); 
+      
+      // $users = all('users');
+      
+      read();
+
+      where();
+
+      orWhere();
+
+      execute();
+
+      // return [
+      //   'view' => 'home',
+      //   'data' => ['users' => $users, 'title' => 'Home']
+      // ];
+
    }
 
 }

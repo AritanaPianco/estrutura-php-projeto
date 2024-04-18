@@ -2,16 +2,32 @@
 
 
 
-function validate(array $validations){
+function validate(array $validations, bool $persistInputs = false, bool $checkCsrf = false){
 
-    $result = [];
+    
+        if($checkCsrf){
+            try {
+                checkCsrf();
+                //code...
+            } catch (Exception $e) {
+                dd($e->getMessage());
+                die(); 
+            }
+        }
+
+        
+    $result = [];   
     $param = '';
     
     foreach($validations as $field => $validate){
         // verificar se não contem barras vai para validação simples,e se contem vai para validação
         $result[$field] = (!strpos($validate, '|'))  ? singleValidation($validate,$field, $param) : mutipleValidations($validate, $field,$param); 
-     
     }
+
+    if($persistInputs){
+        setOld();   
+    }
+
 
     if(in_array(false, $result)){
         return false;            
@@ -19,16 +35,6 @@ function validate(array $validations){
     return $result;
 
 }
-
-function required($field){
-    
-    if($_POST[$field] === ''){
-        setFlash($field, 'O campo é obrigatório');
-        return false;
-    }
-    return filter_input(INPUT_POST, $field, FILTER_SANITIZE_STRING);
-}
-
 
 function singleValidation($validate,$field, $param){   
 
@@ -42,56 +48,25 @@ function singleValidation($validate,$field, $param){
 function mutipleValidations($validate, $field,$param){
     
 
-    $explodePipeValidate = explode('|', $validate);       
+    $explodePipeValidate = explode('|', $validate);
+    $result = [];
          foreach($explodePipeValidate as $validate){
              if(strpos($validate,':')){
              [$validate, $param] = explode(':', $validate); // destructuring uma array     
          }
-         $result = $validate($field, $param); // o nome das funções tem q ser igual ao nome das validações                 
+
+         $result[$field] = $validate($field, $param); // o nome das funções tem q ser igual ao nome das validações                 
+         
+         if(isset($result[$field]) and $result[$field] === false){
+              break;      
+
+         }
+
         }
     
-    return $result;
+    return $result[$field];
 
 
 }
 
-function email($field){
-   
-   $emailIsValid = filter_input(INPUT_POST, $field, FILTER_VALIDATE_EMAIL);
 
-   if(!$emailIsValid){
-       setFlash($field, 'O campo tem que ser um email valido');
-       return false;
-   }
-   // se ja foi validado
-   return filter_input(INPUT_POST, $field, FILTER_SANITIZE_STRING);
-  
-
-}
-
-function unique($field, $param){
-
-    $data = filter_input(INPUT_POST,$field,FILTER_SANITIZE_STRING);
-    $user = findBy($param,$field,$data);
-
-    if($user){
-        setFlash($field, 'O email já esta cadastrado');
-        return false;
-    }
-
-    return $data;
-
-}
-
-function maxlen($field, $param){
-    
-      $data = filter_input(INPUT_POST, $field, FILTER_SANITIZE_STRING);
-      
-      if(strlen($data) > $param){
-         setFlash($field, "O campo não pode ser maior que $param caracteres");
-         return false;
-      }
-
-      return $data;
-
-}
