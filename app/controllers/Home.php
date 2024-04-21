@@ -6,39 +6,49 @@ class Home
 {
  
    public function index($params){
-    
       // dd(delete('users', ['id' => 7])); 
       // $updated = update('users',['nome' => 'marcelo', 'sobrenome' => 'lima', 'email' => 'marcelo@gmail.com'],['id' => 7]);       
       // $users = all('users');
+      $search =  filter_input(INPUT_GET, 's', FILTER_SANITIZE_STRING);     
+   
+      read('users', 'nome,sobrenome,email');
+         
+      if($search){
+         search(['nome' => $search]);
+      } 
+      paginate(3);
+   
+      $users = execute();
+      // tableJoinWithFk('users', 'id');
       
-      read('users', 'id,nome,sobrenome');
+      // whereIn('nome', ['Aritana','alex', 'matheus']);
       
-      where('id', '>',5);
+      
+      // where('nome', 'maria');
+      
+      
+      // if($search){
+         //    search(['nome' => $search, 'sobrenome' => $search]);
+         // }
+         
+         // where('id', '>', 5);
+      
+         // order('id', 'desc');
+         
+         // limit(3);
+         
+         
 
-      orWhere('email', '>' ,'aritanapianco10@gmail.com', 'and');
-      
-      order('id', 'desc');
-      
-      limit(5);
-
-      // paginate(5);
-      
-
-      // where('id', '>', 5);
-      
       // orWhere('sobrenome', '=', 'maia', 'and');
       
-      // order();
+      // order();  
+      // dd($users);
 
-      
-      $users = execute();
+      return [
+        'view' => 'home',
+        'data' => ['users' => $users, 'title' => 'Home', 'links' => render()]
+      ];
 
-      dd($users);
-
-      // return [
-      //   'view' => 'home',
-      //   'data' => ['users' => $users, 'title' => 'Home']
-      // ];
 
    }
 

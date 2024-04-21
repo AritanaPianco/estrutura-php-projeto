@@ -4,6 +4,14 @@ require "bootstrap.php";
 
 try {
 
+//    if($_ENV['MAINTENANCE'] === 'true'){
+//        require './maintenance.php';
+//        die();
+
+//    }
+
+
+
    $data = router();
 
     if(isAjax()){

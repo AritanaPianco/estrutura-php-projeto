@@ -62,10 +62,17 @@ function router()
           $params = formatParams($uri,$params);
      }
 
+     
+     if($_ENV['MAINTENANCE'] === 'true'){
+         $matchedUri = ['/maintenance' => 'Maintenance@index'];        
+      }
+
+   
      if(!empty($matchedUri)){
         return controller($matchedUri, $params);   
      }
 
-     throw new Exception('Algo deu erro');
 
+     throw new Exception('Algo deu erro');
+    
 }
